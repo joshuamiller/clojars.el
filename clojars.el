@@ -5,15 +5,15 @@
 ;; Author: Joshua Miller <josh@joshmiller.io>
 ;; License: GPLv3
 ;; Created: 2014-12-15 17:21:05
-;; Version: x.y.z
-;; Package-Version: ADD THIS e.g. 20151213.xy
+;; Version: 1.0.0
+;; Package-Version: 20151214.100
 ;; URL: https://github.com/joshuamiller/clojars.el
 ;; Keywords: docs, help, tools
 
-;; This file in not part of GNU Emacs.
+;; This file is not part of GNU Emacs.
 
-;; Commentary:
-
+;;; Commentary:
+;;
 ;; M-x clojars - to search clojars.org for a Clojure library
 
 ;;; Code:
