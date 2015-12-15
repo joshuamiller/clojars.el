@@ -5,8 +5,8 @@
 ;; Author: Joshua Miller <josh@joshmiller.io>
 ;; License: GPLv3
 ;; Created: 2014-12-15 17:21:05
-;; Version: 1.0.0
-;; Package-Version: 20151214.100
+;; Version: 1.0.1
+;; Package-Version: 20151215.101
 ;; URL: https://github.com/joshuamiller/clojars.el
 ;; Keywords: docs, help, tools
 ;; Package-Requires: ((request "0.1.0") (cl-lib "0.5"))
