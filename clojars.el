@@ -21,7 +21,6 @@
 
 (require 'request)
 (require 'json)
-(require 'ido)
 (require 'cl-lib)
 
 (defconst clojars-search-endpoint "https://clojars.org/search"
@@ -55,7 +54,7 @@
    :success (cl-function
              (lambda (&key data &allow-other-keys)
                (let ((results (cdr (assoc 'results data))))
-                 (kill-new (ido-completing-read "Results: " (mapcar 'clojars-jar-result results))))))))
+                 (kill-new (completing-read "Results: " (mapcar 'clojars-jar-result results))))))))
 
 (provide 'clojars)
 
