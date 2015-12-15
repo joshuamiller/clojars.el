@@ -9,6 +9,7 @@
 ;; Package-Version: 20151214.100
 ;; URL: https://github.com/joshuamiller/clojars.el
 ;; Keywords: docs, help, tools
+;; Package-Requires: ((request "0.1.0") (cl-lib "0.5"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -21,6 +22,7 @@
 (require 'request)
 (require 'json)
 (require 'ido)
+(require 'cl-lib)
 
 (defconst clojars-search-endpoint "https://clojars.org/search"
   "Clojars search endpoint")
@@ -50,7 +52,7 @@
    clojars-search-endpoint
    :params `(("q" . ,query) ("format" . "json"))
    :parser 'json-read
-   :success (function*
+   :success (cl-function
              (lambda (&key data &allow-other-keys)
                (let ((results (cdr (assoc 'results data))))
                  (kill-new (ido-completing-read "Results: " (mapcar 'clojars-jar-result results))))))))
