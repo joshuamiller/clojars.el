@@ -10,6 +10,6 @@ Clojars.el is on MELPA:
 
 # License
 
-This project is Copyright 2014-2015 Joshua Miller and distributed
+This project is Copyright 2014-2016 Joshua Miller and distributed
 under the GNU General Public License v 3. The license is available in
 the file `LICENSE.md`.
