@@ -5,11 +5,11 @@
 ;; Author: Joshua Miller <josh@joshmiller.io>
 ;; License: GPLv3
 ;; Created: 2014-12-15 17:21:05
-;; Version: 1.0.1
-;; Package-Version: 20151215.101
+;; Version: 1.1.0
+;; Package-Version: 20160519.110
 ;; URL: https://github.com/joshuamiller/clojars.el
 ;; Keywords: docs, help, tools
-;; Package-Requires: ((request "0.1.0") (cl-lib "0.5"))
+;; Package-Requires: ((request-deferred "0.2.0"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -19,9 +19,9 @@
 
 ;;; Code:
 
-(require 'request)
+(require 'request-deferred)
 (require 'json)
-(require 'cl-lib)
+(require 'deferred)
 
 (defconst clojars-search-endpoint "https://clojars.org/search"
   "Clojars search endpoint")
@@ -47,14 +47,17 @@
    result to kill ring"
   (interactive "sSearch Clojars: ")
   (message "Loading...")
-  (request
-   clojars-search-endpoint
-   :params `(("q" . ,query) ("format" . "json"))
-   :parser 'json-read
-   :success (cl-function
-             (lambda (&key data &allow-other-keys)
-               (let ((results (cdr (assoc 'results data))))
-                 (kill-new (completing-read "Results: " (mapcar 'clojars-jar-result results))))))))
+  (deferred:$
+    (request-deferred
+     clojars-search-endpoint
+     :params `(("q" . ,query) ("format" . "json"))
+     :parser 'json-read
+     :sync   t)
+    (deferred:nextc it
+      (lambda (response)
+        (let ((results (cdr (assoc 'results (request-response-data response)))))
+          (kill-new (completing-read "Results: "
+                                     (mapcar 'clojars-jar-result results))))))))
 
 (provide 'clojars)
 
