@@ -56,8 +56,13 @@
     (deferred:nextc it
       (lambda (response)
         (let ((results (cdr (assoc 'results (request-response-data response)))))
-          (kill-new (completing-read "Results: "
-                                     (mapcar 'clojars-jar-result results))))))))
+	  (if (= 0 (length results))
+	      (message "No clojars found with that name")
+	    (progn
+	      (kill-new (completing-read "Results [TAB to complete]: "
+					 (mapcar 'clojars-jar-result results)
+					 nil 'confirm-after-completion))
+	      (message "You've copied: %s clojar" (car kill-ring)))))))))
 
 (provide 'clojars)
 
