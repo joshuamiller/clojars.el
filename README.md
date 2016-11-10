@@ -8,6 +8,10 @@ Clojars.el is on MELPA:
 
 <kbd>M-x</kbd> package-install <kbd>RET</kbd> clojars
 
+# Usage
+
+<kbd>M-x</kbd> clojars
+
 # License
 
 This project is Copyright 2014-2016 Joshua Miller and distributed
