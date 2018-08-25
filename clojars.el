@@ -36,7 +36,9 @@
 (defun clojars-format-dependency (result)
   (let ((version (cdr (assoc 'version result)))
         (name (clojars-jar-name result)))
-    (format "[%s %S]" name version)))
+    (if (string-match "deps.edn$" (buffer-file-name))
+        (format "%s {:mvn/version %S}" name version)
+        (format "[%s %S]" name version))))
 
 (defun clojars-jar-result (result)
   (cons (clojars-format-dependency result) (clojars-jar-name result)))
